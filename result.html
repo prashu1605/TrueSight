@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Detection Result</title>
+  <style>
+    .result-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.bar {
+  width: 400px;
+  height: 30px;
+  background: #ddd;
+  border-radius: 20px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+#bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff3c3c, #ff9900);
+  width: 0%;
+  color: white;
+  font-weight: bold;
+  line-height: 30px;
+  text-align: center;
+  border-radius: 20px 0 0 20px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="result-container">
+    <h1>Detection Result</h1>
+    <img id="uploadedImage" src="" alt="Uploaded" width="400" />
+    <div class="bar">
+      <div id="bar-fill">0%</div>
+    </div>
+    <p id="percentText">Calculating...</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const img = params.get("img");
+    const score = params.get("score");
+    const label = params.get("label");
+
+    document.getElementById("uploadedImage").src = img;
+    document.getElementById("bar-fill").style.width = `${score}%`;
+    document.getElementById("bar-fill").innerText = `${score}%`;
+    document.getElementById("percentText").innerText = `Model thinks: ${label} (${score}% confidence)`;
+  </script>
+</body>
+</html>
